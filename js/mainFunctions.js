@@ -52,8 +52,8 @@ $(function () {
 // Listener pour chargement adresse mailto
 window.addEventListener("load", function () {
   if (document.getElementById('insertMail')) {
-    let name = "stephane_debuire" ; // Update yours informations here
-    let domain = "hotmail.com" ; // Update yours informations here
+    let name = "contact" ; // Update yours informations here
+    let domain = "otherlies.fr" ; // Update yours informations here
     //let subject = "subject=Formulaire Tuco" ;
     let divMail = document.getElementById('insertMail');
     let newAhref = document.createElement('a');
