@@ -298,6 +298,15 @@ h2#slogan {
     transform: translateY(0) translateX(-50%);
   }
 }
+p.slogan {
+    position: absolute;
+    text-align: center;
+    width: 65%;
+    bottom: 5%;
+}
+p.slogan img {
+    width: 100%;
+}
 p {
   color: #9fa0ac;
   line-height: 30px;
