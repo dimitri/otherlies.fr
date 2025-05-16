@@ -844,4 +844,60 @@ button[name=backSite] {
   }
 }
 
+
+h3 {
+    text-align: center;
+    font-size: 4vh;
+    color: #F4591E;
+    margin: 2em;
+}
+
+.container {
+    display: block;
+}
+
+.testimonials {
+    display: flex;
+    flex-direction: row;
+    align-items: center top;
+    justify-content: center;
+    overflow: auto;
+    height: 500px;
+    margin: 0px;
+}
+
+@media only screen and (max-width: 767px) {
+    .testimonials {
+        flex-direction: column;
+    }
+}
+
+.testimonial {
+    float: left;
+    margin: 10px;
+    max-width: 30%;
+    vertical-align: top;
+}
+
+@media only screen and (max-width: 767px) {
+    .testimonial {
+        max-width: 80%;
+    }
+}
+
+.testimonial h3 {
+    font-size: 120%;
+    color: white;
+    text-align: center;
+    vertical-align: bottom;
+    margin: 0px;
+    padding: 0px;
+}
+
+.testimonial p {
+    vertical-align: top;
+    overflow: auto;
+    border-top: solid 1px #F4591E;
+}
+
 /*# sourceMappingURL=style.css.map */
