@@ -345,7 +345,7 @@ p.miniPara {
   justify-content: space-around;
   align-items: center;
   margin: auto;
-  width: 80%;
+  width: 100%;
 }
 .imgContent .card {
   display: flex;
@@ -844,6 +844,35 @@ button[name=backSite] {
   }
 }
 
+h4 {
+    display: block;
+    font-size: 3vh;
+    margin-bottom: 20px;
+}
+
+.two-columns {
+  column-count: 2;
+}
+
+@media only screen and (max-width: 767px) {
+    .two-columns {
+        column-count: 1;
+    }
+}
+
+.two-columns p {
+    max-width: 440px;
+    margin-right: 10px;
+    color: white;
+    line-height: 30px;
+    break-inside: avoid;
+}
+
+ss-music > p {
+    color: white;
+    line-height: 30px;
+    margin: 10px;
+}
 
 h3 {
     text-align: center;
