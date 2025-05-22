@@ -5,7 +5,7 @@ UPSTREAM   = https://github.com/skorokithakis/docker-fgallery.git
 DOCKERFILE = /Users/dim/dev/temp/docker-fgallery/Dockerfile
 
 MOUNT = -v .:/fgallery/src
-OPTS  = --min-thumb 112x150 --max-thumb 200x267 -i
+OPTS  = --min-thumb 112x150 --max-thumb 200x267 -i -d
 CMD   = ./fgallery $(OPTS) ./src/img ./src/photo-shoot 
 
 all: gallery
