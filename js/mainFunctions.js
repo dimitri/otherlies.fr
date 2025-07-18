@@ -319,10 +319,18 @@ $(function () {
 $(function () {
     $('.facebook').on('click', function(event) {
       event.preventDefault();
-      window.location.href = "https://facebook.com/";
+      window.location.href = "https://www.facebook.com/profile.php?id=100069529463671";
     });
     $('.instagram').on('click', function(event) {
       event.preventDefault();
       window.location.href = "https://www.instagram.com/other_lies_official/";
+    });
+    $('.applemusic').on('click', function(event) {
+      event.preventDefault();
+      window.location.href = "https://music.apple.com/us/artist/other-lies/1507963437";
+    });
+    $('.youtube').on('click', function(event) {
+      event.preventDefault();
+      window.location.href = "https://www.youtube.com/watch?v=qXw1dqE_FtU&list=OLAK5uy_nUUa9ocPH_cSZ1I9kS4vyfQ2ZeH3phtvc";
     });
 })

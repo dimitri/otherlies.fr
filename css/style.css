@@ -37,12 +37,15 @@ body {
   top: 5%;
   left: 5%;
   display: flex;
+  flex-direction: column;
+  column-count: 1;
 }
 
 .elementBtn {
   padding: 0 5px;
   cursor: pointer;
   transition: all ease-in-out 250ms;
+  padding: 5px;
 }
 .elementBtn img {
   position: relative;
@@ -227,6 +230,17 @@ section {
     }
 }
 
+.EPKmainView {
+  position: relative;
+  min-height: 100vh;
+  max-height: 100vh;
+  color: #9fa0ac;
+  background-image: url("../img/surfacing-alt-1.jpg");
+  background-size: cover;
+  background-color: transparent;
+  background-position: center center;
+}
+
 h1 {
   position: absolute;
   text-align: center;
@@ -352,6 +366,7 @@ p.miniPara {
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  padding: 10px;
 }
 .imgContent .card p {
   text-align: center;
@@ -744,9 +759,9 @@ button[name=backSite] {
     bottom: 20%;
   }
 
-  .shareBtn {
-    display: none;
-  }
+  /* .shareBtn { */
+  /*   display: none; */
+  /* } */
 
   footer .socialBanner {
     display: none;
