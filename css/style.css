@@ -9,12 +9,14 @@ html {
 }
 
 ::-moz-selection {
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #F27C8E;
   color: white;
 }
 
 ::selection {
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #F27C8E;
   color: white;
 }
 
@@ -29,7 +31,8 @@ body {
   font-size: 1rem;
   color: #FEFEFE;
   font-size: 16px;
-  background-color: #1A1B1D;
+  /* background-color: #1A1B1D; */
+  background-color: #0E141B;
 }
 
 .shareBtn {
@@ -61,8 +64,10 @@ body {
   right: 5%;
   width: 50px;
   height: 50px;
-  background-color: #F4591E;
-  border: solid 2px #F4591E;
+  /* background-color: #F4591E; */
+  /* border: solid 2px #F4591E; */
+  background-color: #F27C8E;
+  border: solid 2px #8FD0F2;
   border-radius: 50%;
   cursor: pointer;
   z-index: 3;
@@ -72,7 +77,8 @@ body {
   left: 25%;
   height: 1px;
   transform-origin: left;
-  background-color: #1A1B1D;
+  /* background-color: #1A1B1D; */
+  background-color: #0E141B;
 }
 .menu .line1 {
   top: 35%;
@@ -130,7 +136,8 @@ body {
   transition: all ease-in-out 100ms;
 }
 .ss-menu:hover {
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #F27C8E;
   transition: all ease-in-out 100ms;
 }
 
@@ -208,14 +215,16 @@ section {
   height: 2px;
   margin-top: 50px;
   margin-bottom: 50px;
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #3F8FC1;
 }
 
 .mainView {
   position: relative;
   min-height: 100vh;
   max-height: 100vh;
-  color: #9fa0ac;
+  /* color: #9fa0ac; */
+  color: #F4F8FB;
   background-image: url("../img/Other-Lies-Band.jpeg");
   background-size: cover;
   background-color: transparent;
@@ -234,7 +243,8 @@ section {
   position: relative;
   min-height: 100vh;
   max-height: 100vh;
-  color: #9fa0ac;
+  /* color: #9fa0ac; */
+  color: #F4F8FB;
   background-image: url("../img/surfacing-alt-1.jpg");
   background-size: cover;
   background-color: transparent;
@@ -277,7 +287,8 @@ h1 {
   }
 }
 h2 {
-  font-size: 2rem;
+    font-size: 2rem;
+    color:  #8FD0F2;
 }
 
 h2#slogan {
@@ -289,7 +300,8 @@ h2#slogan {
   top: 85%;
   font-size: 5vh;
   font-weight: 600;
-  color: #F4591E;
+  color: #F27C8E;
+  /* color: #F4591E; */
   /* color: #469BD2; */
   text-shadow: 0 2px 10px #1A1B1D;
   opacity: 0;
@@ -333,13 +345,15 @@ p.slogan img {
     width: 100%;
 }
 p {
-  color: #9fa0ac;
+  /* color: #9fa0ac; */
+  color: #F4F8FB;
   line-height: 30px;
   margin: 50px 0 50px 0;
 }
 
 p.miniPara {
-  color: #FEFEFE;
+  /* color: #FEFEFE; */
+  color: #F4F8FB;
   line-height: 30px;
   margin: 0;
 }
@@ -375,7 +389,8 @@ p.miniPara {
 }
 .imgContent .card p:first-of-type {
   font-size: 1.3rem;
-  color: #FEFEFE;
+  /* color: #FEFEFE; */
+  color: #F4F8FB;
 }
 .imgContent .card::before {
   content: url("../img/instagram-min-white.svg");
@@ -419,7 +434,8 @@ p.miniTitle {
 }
 
 p.pink {
-  color: #F4591E;
+  /* color: #F4591E; */
+  color: #F27C8E;
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 1px;
@@ -433,7 +449,8 @@ p.pink:hover {
 
 #bandVideo {
   width: 640px;
-  background-color: #1E0E18;
+  /* background-color: #1E0E18; */
+  background-color: #0E141B;
   cursor: pointer;
 }
 
@@ -481,7 +498,8 @@ p.pink:hover {
 }
 
 footer {
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #3F8FC1;
   min-height: 15vh;
 }
 
@@ -703,7 +721,8 @@ button[name=backSite] {
   max-width: 250px;
   margin: 25px;
   padding: 10px;
-  background-color: #F4591E;
+  /* background-color: #F4591E; */
+  background-color: #F27C8E;
   font-size: 2.5vh;
   font-weight: bolder;
   color: white;
@@ -892,7 +911,8 @@ ss-music > p {
 h3 {
     text-align: center;
     font-size: 4vh;
-    color: #F4591E;
+    /* color: #F4591E; */
+    color: #3F8FC1;
     margin: 25px;
 }
 
@@ -944,13 +964,15 @@ h3 {
     vertical-align: top;
     overflow: auto;
     margin: 10px;
-    border-top: solid 1px #F4591E;
+    /* border-top: solid 1px #F4591E; */
+    border-top: solid 1px #3F8FC1;
 }
 
 .testimonial p::first-letter {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #F4591E;
+  /* color: #F4591E; */
+  color: #8FD0F2;
 }
 
 /*# sourceMappingURL=style.css.map */
