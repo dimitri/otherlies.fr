@@ -336,6 +336,18 @@ h1 {
 h2 {
   font-size: 2rem;
   color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+h2 i {
+  font-size: 1.4rem;
+  color: var(--color-accent);
+  transition: transform var(--transition-medium), color var(--transition-medium);
+}
+h2:hover i {
+  transform: scale(1.15) rotate(-5deg);
+  color: var(--color-secondary);
 }
 
 h2#slogan {
