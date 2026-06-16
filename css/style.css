@@ -442,6 +442,9 @@ img { display: block; max-width: 100%; }
 .member img {
   width: 100%;
   max-width: 230px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 25%;
   margin: 0 auto 14px;
   border-radius: var(--radius);
   filter: grayscale(1) contrast(1.05);
