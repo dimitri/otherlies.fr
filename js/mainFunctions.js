@@ -1,299 +1,78 @@
-// Toggle class menu
-$(function () {
-    $('.menu').on('click', function () {
-        $(this).toggleClass('active');
-        if ($(this).hasClass('active')) {
-            $('.ss-menu1').addClass('visible1');
-            $('.ss-menu2').addClass('visible2');
-            $('.ss-menu3').addClass('visible3');
-            $('.ss-menu4').addClass('visible4');
-            $('.ss-menu5').addClass('visible5');
-        } else {
-            $('.ss-menu1').removeClass('visible1');
-            $('.ss-menu2').removeClass('visible2');
-            $('.ss-menu3').removeClass('visible3');
-            $('.ss-menu4').removeClass('visible4');
-            $('.ss-menu5').removeClass('visible5');
-        }
+/* =========================================================================
+   Other Lies — vanilla JS (no jQuery / GSAP / ScrollMagic / Rellax)
+   Handles: sticky header, mobile drawer, scroll-reveal, back-to-top,
+   email obfuscation. Degrades gracefully and respects reduced motion.
+   ========================================================================= */
+(function () {
+  "use strict";
+
+  var header   = document.getElementById("header");
+  var toggle   = document.getElementById("navToggle");
+  var drawer   = document.getElementById("mobileNav");
+  var toTop     = document.getElementById("toTop");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- sticky header + back-to-top (single scroll handler) ----------- */
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (header) header.classList.toggle("scrolled", y > 40);
+    if (toTop)  toTop.classList.toggle("show", y > 600);
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---- mobile drawer ------------------------------------------------- */
+  function setMenu(open) {
+    if (!drawer || !toggle) return;
+    drawer.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      setMenu(toggle.getAttribute("aria-expanded") !== "true");
     });
-
-    $('.ss-menu').on('click', function () {
-        $('.menu').removeClass('active');
-        $('.ss-menu1').removeClass('visible1');
-        $('.ss-menu2').removeClass('visible2');
-        $('.ss-menu3').removeClass('visible3');
-        $('.ss-menu4').removeClass('visible4');
-        $('.ss-menu5').removeClass('visible5');
+  }
+  if (drawer) {
+    drawer.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { setMenu(false); });
     });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setMenu(false);
+  });
 
-    $('#upArrow').on('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  /* ---- back to top --------------------------------------------------- */
+  if (toTop) {
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     });
+  }
 
-    $('#scrollDown').on('click', function () {
-        window.location.href = "#nextShow";
-    });
-
-    // Consolidated scroll handler
-    $(window).on('scroll', function () {
-        let scrollNow = $(window).scrollTop();
-
-        // Close menu on scroll
-        if ($('.menu').hasClass('active')) {
-            $('.menu').removeClass('active');
-            $('.ss-menu1').removeClass('visible1');
-            $('.ss-menu2').removeClass('visible2');
-            $('.ss-menu3').removeClass('visible3');
-            $('.ss-menu4').removeClass('visible4');
-            $('.ss-menu5').removeClass('visible5');
+  /* ---- scroll reveal (IntersectionObserver) -------------------------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
         }
+      });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+    revealEls.forEach(function (el) { io.observe(el); });
+  }
 
-        // Back to top button visibility
-        if (scrollNow > 600) {
-            $('#upArrow').show();
-        } else {
-            $('#upArrow').hide();
-        }
-
-        // Hide scroll down tag after scrolling
-        if (scrollNow >= 150) {
-            $('#scrollDown').hide();
-        } else {
-            $('#scrollDown').show();
-        }
-
-        // Animations on scroll
-        let sizePage = $(window).height();
-        let trigger = 100;
-
-        let element = document.getElementsByClassName('animatableY');
-        for (var unit of element) {
-            if (unit.getBoundingClientRect().top + trigger <= sizePage) {
-                unit.classList.add('showed');
-            }
-        }
-
-        let elementh2 = document.getElementsByClassName('animatableX');
-        for (var unit of elementh2) {
-            if (unit.getBoundingClientRect().top + trigger <= sizePage) {
-                unit.classList.add('showed');
-            }
-        }
-
-        let elementOpacity = document.getElementsByClassName('animatableOpacity');
-        for (var unit of elementOpacity) {
-            if (unit.getBoundingClientRect().top + trigger <= sizePage) {
-                unit.classList.add('showed');
-            }
-        }
-    });
-});
-
-// Parallax effect and gsap
-$(function () {
-    if (!window.location.pathname.match("mentions")) {
-        $('.rellax').css('transform', 'translateX(-50%)');
-        var rellax = new Rellax('.rellax');
-    }
-});
-
-// Email address injection
-window.addEventListener("load", function () {
-    if (document.getElementById('insertMail')) {
-        let name = "contact";
-        let domain = "otherlies.fr";
-        let divMail = document.getElementById('insertMail');
-        let newAhref = document.createElement('a');
-        newAhref.href = "mailto:" + name + '@' + domain;
-        newAhref.innerHTML = name + '@' + domain;
-        divMail.appendChild(newAhref);
-    }
-});
-
-// Video click handler
-$(function () {
-    $('video').on('click', function (event) {
-        event.preventDefault();
-        document.getElementById('tucoVideo').play();
-    });
-});
-
-// Contact form field validation
-$(function () {
-    $('#nom').on('blur input', function () {
-        if ($('#nom').val().length >= 50) {
-            $('#helpNom').text('50 characters max').hide().show();
-        } else {
-            $('#helpNom').slideUp(400);
-        }
-    });
-
-    $('#telephone').on('blur input', function () {
-        let regexTelephone = /[0]{1}[1-7]{1}[0-9]{8}/;
-        let telEntry = String(document.getElementById('telephone').value);
-        for (var i = 0; i < telEntry.length; i++) {
-            telEntry = telEntry.replace(" ", "");
-        }
-        if (!telEntry.match(regexTelephone)) {
-            $('#helpTel').text('Incorrect phone number').hide().show();
-        } else {
-            $('#helpTel').slideUp(400);
-        }
-    });
-
-    $('#mail').on('blur input', function () {
-        let regexMail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-        let mailEntry = $('input#mail').val();
-        if (!mailEntry.match(regexMail)) {
-            $('#helpMail').text('Incorrect email address').hide().show();
-        } else {
-            $('#helpMail').slideUp(400);
-        }
-    });
-
-    $('#checkRobot').on('blur input', function () {
-        if ($('#checkRobot').val() != 7) {
-            $('#helpRobot').text('Incorrect result of the operation').hide().show();
-        } else {
-            $('#helpRobot').slideUp(400);
-        }
-    });
-
-    $('#message').on('blur input', function () {
-        if ($('#message').val().length >= 3000) {
-            $('#helpMessage').text('Your message must not exceed 3000 characters').hide().slideDown(400);
-        } else {
-            $('#helpMessage').slideUp(400);
-        }
-    });
-});
-
-// Contact form submission
-$(function () {
-    $('.contactForm').on('submit', function (e) {
-        e.preventDefault();
-        let nom = $('#nom').val();
-        let telephone = $('#telephone').val();
-        let mail = $('#mail').val();
-        let message = $('#message').val();
-        let newsletter = $('input[name="newsletter"]:checked').val();
-        let checkRobot = $('#checkRobot').val();
-        if ($('#checkRobot').val() == 7) {
-            $.post('../datas/sendFormContact.php',
-                {
-                    nom: nom,
-                    telephone: telephone,
-                    mail: mail,
-                    message: message,
-                    newsletter: newsletter,
-                    checkRobot: checkRobot
-                },
-                function (data, textStatus, xhr) {
-                    $('form').fadeOut(400, function () {
-                        $('#retourFormulaire').css({
-                            "padding": "10px",
-                            "margin-top": "160px",
-                            "margin-bottom": "160px",
-                            "margin-left": "auto",
-                            "margin-right": "auto",
-                            "color": "white",
-                            "font-size": "1rem",
-                            "text-align": "center"
-                        });
-                        $('#retourFormulaire').html(data);
-                    });
-                    $('#nom').val('');
-                    $('#telephone').val('');
-                    $('#mail').val('');
-                    $('#message').val('');
-                    $('#checkRobot').val('');
-                });
-        } else {
-            alert('Incorrect anti robot check result !');
-        }
-    });
-});
-
-// Newsletter form validation
-$(function () {
-    let regexMail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
-    $('#emailNews').on('blur input', function (event) {
-        let mailEntry = $('#emailNews').val();
-        if (!mailEntry.match(regexMail)) {
-            $('#helpMailNews').text('Incorrect email address').hide().show();
-            $('#hideNews').hide();
-        } else {
-            $('#helpMailNews').slideUp(100, function () {
-                $('#hideNews').fadeIn();
-            });
-        }
-    });
-
-    $('#checkRobotNews').on('blur input', function (event) {
-        if ($('#checkRobotNews').val() != 7) {
-            $('#helpMailNews').text('Incorrect result').hide().show();
-        } else {
-            $('#helpMailNews').slideUp(100);
-        }
-    });
-});
-
-// Newsletter form submission
-$(function () {
-    $('.newsletterForm').on('submit', function (e) {
-        e.preventDefault();
-        let mail = $('#emailNews').val();
-        let checkRobot = $('#checkRobotNews').val();
-        if ($('#checkRobotNews').val() == 7) {
-            $.post('../datas/sendFormSubscription.php',
-                {
-                    mail: mail,
-                    checkRobot: checkRobot
-                },
-                function (data, textStatus, xhr) {
-                    $('.newsletterForm').fadeOut(400, function () {
-                        $('#retourNewsFormulaire').css({
-                            "padding": "10px",
-                            "margin-top": "60px",
-                            "margin-bottom": "60px",
-                            "margin-left": "auto",
-                            "margin-right": "auto",
-                            "color": "white",
-                            "font-size": "1rem",
-                            "text-align": "center"
-                        });
-                        $('#retourNewsFormulaire').html(data);
-                    });
-                    $('#emailNews').val('');
-                    $('#checkRobotNews').val('');
-                });
-        } else {
-            alert('Incorrect anti robot check result !');
-        }
-    });
-});
-
-// Lazyload
-$(function () {
-    if (!window.location.pathname.match("mentions")) {
-        lazyload();
-    }
-});
-
-// Resize reload
-$(function () {
-    let initialWidth = $(window).innerWidth();
-    $(window).on('resize', function () {
-        let newWidth = $(window).innerWidth();
-        if (initialWidth != newWidth) {
-            document.location.reload();
-        }
-    });
-});
-
-// Card click handler (album cards excluded)
-$(function () {
-    $(".card:not(.bandcamp-album)").on('click', function () {
-        window.location.href = "https://www.instagram.com/other_lies_official/";
-    });
-});
+  /* ---- email obfuscation -------------------------------------------- */
+  var mailHost = document.getElementById("insertMail");
+  if (mailHost) {
+    var user = "contact", domain = "otherlies.fr";
+    var a = document.createElement("a");
+    a.href = "mailto:" + user + "@" + domain;
+    a.textContent = user + "@" + domain;
+    mailHost.appendChild(a);
+  }
+})();
